@@ -1,25 +1,36 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
-const NoteSchema = new Schema({
-  title: {
-    type: String,
-    trim: true,
-    required: 'Title is Required'
+const reactionSchema = new Schema({
+  reactionId: {
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId(),
   },
 
-  note: {
+  reactionBody: {
     type: String,
-    trim: true,
-    required: 'Password is Required',
-    minlength: 6
+    required: 'Reaction is Required',
+    maxlength: 280
   },
+
+  username: {
+    type: String,
+    required: 'Username is Required'
+  },
+  
 
   createdAt: {
     type: Date,
-    default: Date.now
-  }
-});
+    default: Date.now,
+    get: timeStamp => dateFormat(timeStamp)
+  },
 
-const Note = model('Note', NoteSchema);
+},
+{
+  toJSON:{
+    getters:true
+  },
+  id:false
+}
+);
 
-module.exports = Note;
+module.exports = reactionSchema;
