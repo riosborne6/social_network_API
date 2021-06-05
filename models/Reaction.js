@@ -5,7 +5,6 @@ const reactionSchema = new Schema({
     type: Schema.Types.ObjectId,
     default: () => new Types.ObjectId(),
   },
-
   reactionBody: {
     type: String,
     required: 'Reaction is Required',
@@ -16,8 +15,6 @@ const reactionSchema = new Schema({
     type: String,
     required: 'Username is Required'
   },
-  
-
   createdAt: {
     type: Date,
     default: Date.now,
