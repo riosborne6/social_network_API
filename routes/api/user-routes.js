@@ -1,21 +1,28 @@
 const router = require('express').Router();
 const {
-  addComment,
-  removeComment,
-  addReply,
-  removeReply
+  getAllusers,
+  getUserById,
+  createUser,
+  updateUser,
+  deleteUser,
+  createFriend,
+  deleteFriend
 } = require('../../controllers/userController');
 
 // /api/comments/<pizzaId>
-router.route('/:pizzaId').post(addComment);
+router.route('/').get(getAllusers).post(createUser);
 
-// /api/comments/<pizzaId>/<commentId>
+// /api/comments/<userId>/<commentId>
 router
-  .route('/:pizzaId/:commentId')
-  .put(addReply)
-  .delete(removeComment);
+  .route('/:userId')
+  .get(getUserById)
+  .put(updateUser)
+  .delete(deleteUser);
 
 // /api/comments/<pizzaId>/<commentId>/<replyId>
-router.route('/:pizzaId/:commentId/:replyId').delete(removeReply);
+router
+  .route('/:userId/friends/:friendsId')
+  .post(createFriend)
+  .delete(deleteFriend);
 
 module.exports = router;
