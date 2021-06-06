@@ -13,7 +13,7 @@ const ThoughtController = {
 
   // get one pizza by id
   getThoughtById({ params }, res) {
-    Thought.findOne({ _id: params.id })
+    Thought.findOne({ _id: params.thoughtId })
       .then(dbThoughtData => {
         // If no pizza is found, send 404
         if (!dbThoughtData) {
@@ -36,7 +36,7 @@ const ThoughtController = {
 
   // update pizza by id
   updateThought({ params, body }, res) {
-    Thought.findOneAndUpdate({ _id: params.id }, body, { new: true })
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, { new: true })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
           res.status(404).json({ message: 'No Thought found with this id!' });
@@ -49,7 +49,7 @@ const ThoughtController = {
 
   // delete pizza
   deleteThought({ params }, res) {
-    Thought.findOneAndDelete({ _id: params.id })
+    Thought.findOneAndDelete({ _id: params.thoughtId })
       .then(dbThoughtData => {
         if (!dbThoughtData) {
           res.status(404).json({ message: 'No Thought found with this id!' });
